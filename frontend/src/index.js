@@ -11,8 +11,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const defaultStore = {
+  categories: [],
+  posts: [],
+  comments: []
+}
+
 const store = createStore(
   rootReducer,
+  defaultStore,
   composeEnhancers(applyMiddleware(logger))
 );
 

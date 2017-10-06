@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import CategoryList from "../components/CategoryList";
+import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
+
 
 class HomeRoute extends Component {
   render() {
@@ -6,10 +10,6 @@ class HomeRoute extends Component {
       <div className="home">
         <h1>Home</h1>
         <ul>
-          <li>
-            should list all available categories, which should link to a
-            category view for that category
-          </li>
           <li>
             should list all of the posts ordered by voteScore (highest score
             first)
@@ -20,9 +20,18 @@ class HomeRoute extends Component {
           </li>
           <li>should have a control for adding a new post</li>
         </ul>
+
+        {/* CATEGORIES */}
+        <CategoryList categories={this.props.categories} />
       </div>
     );
   }
 }
 
-export default HomeRoute;
+function mapStateToProps({ categories }) {
+  return {
+    categories
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(HomeRoute));
