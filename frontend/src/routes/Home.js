@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import RaisedButton from "material-ui/RaisedButton";
+import { Button } from "semantic-ui-react";
 
 import CategoryList from "../components/CategoryList";
 import PostList from "../components/PostList";
-import AddPostIcon from "react-icons/lib/fa/pencil-square";
 
 class HomeRoute extends Component {
   render() {
@@ -20,12 +19,9 @@ class HomeRoute extends Component {
         <PostList posts={this.props.posts} />
 
         {/* ADD POST*/}
-        <RaisedButton
-          containerElement={<Link to="posts/new" />}
-          label="Create Post"
-          primary={true}
-          icon={<AddPostIcon />}
-        />
+        <Button primary>
+          <Link to="posts/new">Create Post</Link>
+        </Button>
       </div>
     );
   }

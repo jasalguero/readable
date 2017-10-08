@@ -1,17 +1,13 @@
-// import { ADD_RECIPE, REMOVE_FROM_CALENDAR } from "../actions";
+import { ADD_COMMENTS } from "../actions";
 
-function comments(state = {}, action) {
+function commentsReducer(state = {}, action) {
   switch (action.type) {
-    // case ADD_RECIPE:
-    //   const { recipe } = action;
-    //   return {
-    //     ...state,
-    //     [recipe.label]: recipe
-    //   };
-
+    case ADD_COMMENTS:
+      const { comments } = action;
+      return comments;
     default:
       return state;
   }
 }
 
-export default comments;
+export default commentsReducer;

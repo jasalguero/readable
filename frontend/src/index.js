@@ -8,8 +8,8 @@ import rootReducer from "./reducers";
 import { Provider } from "react-redux";
 import { createLogger } from "redux-logger";
 import { BrowserRouter } from "react-router-dom";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import thunkMiddleware from "redux-thunk";
+import "semantic-ui-css/semantic.min.css";
 
 /* MIDDLEWARE */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -33,9 +33,7 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <MuiThemeProvider>
-        <App />
-      </MuiThemeProvider>
+      <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

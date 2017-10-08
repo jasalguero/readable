@@ -32,9 +32,7 @@ export function fetchPosts() {
  * @param {String} category 
  */
 export function fetchPostsByCategory(category) {
-  return fetch(`${API}/${category}/posts`, { headers })
-    .then(res => res.json())
-    .then(data => data.posts);
+  return fetch(`${API}/${category}/posts`, { headers }).then(res => res.json());
 }
 
 /**
@@ -42,7 +40,13 @@ export function fetchPostsByCategory(category) {
  * @param {String} postId 
  */
 export function fetchPost(postId) {
-  return fetch(`${API}/posts/${postId}`, { headers })
-    .then(res => res.json())
-    .then(data => data.post);
+  return fetch(`${API}/posts/${postId}`, { headers }).then(res => res.json());
+}
+
+/**
+ * Retrieve an individual post
+ * @param {String} postId 
+ */
+export function fetchComments(postId) {
+  return fetch(`${API}/posts/${postId}/comments`, { headers }).then(res => res.json());
 }

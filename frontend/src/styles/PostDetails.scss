@@ -1,0 +1,11 @@
+.post-details {
+    .row {
+        display: flex;
+        .label {
+            font-weight: bold;
+        }
+        .value {
+            margin-left: 20px;
+        }
+    }
+}

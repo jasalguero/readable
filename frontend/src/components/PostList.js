@@ -1,19 +1,12 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-// import RightArrow from "react-icons/lib/md/link";
 import SortDescIcon from "react-icons/lib/fa/sort-alpha-desc";
 import SortAscIcon from "react-icons/lib/fa/sort-alpha-asc";
+import { Link } from "react-router-dom";
+import DetailsIcon from "react-icons/lib/fa/file-text-o";
 
 import "../styles/PostList.css";
 
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn
-} from "material-ui/Table";
+import { Table } from "semantic-ui-react";
 
 class PostList extends Component {
   /**
@@ -59,40 +52,40 @@ class PostList extends Component {
   }
 
   /**
-   * Handle the clicking on the headers to change the sorting field / direction
-   * @param {*} target 
-   */
-  handleSort(target) {
-    const field = target.getAttribute("data-field");
-
-    if (field === this.state.field) {
-      this.setState({ order: this.state.order === "asc" ? "desc" : "asc" });
-    } else {
-      this.setState({ field: field });
-    }
-  }
-
-  /**
    * Generate dynamically the table headers
    */
   getTableHeader() {
     const fields = ["title", "timestamp", "author", "category", "voteScore"];
 
     return (
-      <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-        <TableRow onCellClick={event => this.handleSort(event.target)}>
+      <Table.Header>
+        <Table.Row>
           {fields.map(field => (
-            <TableHeaderColumn
+            <Table.HeaderCell
               className={field === this.state.field ? "selected" : ""}
-              data-field={field}
               key={field}
+              onClick={() => this.handleSort(field)}
             >
-              {field} {this.getHeaderIcon(field)}
-            </TableHeaderColumn>
+              {field === "timestamp" ? "date" : field}{" "}
+              {this.getHeaderIcon(field)}
+            </Table.HeaderCell>
           ))}
-        </TableRow>
-      </TableHeader>
+          <Table.HeaderCell>Details</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
     );
+  }
+
+  /**
+   * Handle the clicking on the headers to change the sorting field / direction
+   * @param {*} target 
+   */
+  handleSort(field) {
+    if (field === this.state.field) {
+      this.setState({ order: this.state.order === "asc" ? "desc" : "asc" });
+    } else {
+      this.setState({ field: field });
+    }
   }
 
   render() {
@@ -103,20 +96,25 @@ class PostList extends Component {
         <h3>Posts</h3>
         <Table>
           {this.getTableHeader()}
-          <TableBody displayRowCheckbox={false} showRowHover={true}>
+          <Table.Body displayRowCheckbox={false} showRowHover={true}>
             {posts.map(post => (
-              <TableRow key={post.id}>
-                <TableRowColumn>{post.title}</TableRowColumn>
-                <TableRowColumn>
+              <Table.Row key={post.id}>
+                <Table.Cell>{post.title}</Table.Cell>
+                <Table.Cell>
                   {new Date(post.timestamp).toLocaleDateString()} -{" "}
                   {new Date(post.timestamp).toLocaleTimeString()}
-                </TableRowColumn>
-                <TableRowColumn>{post.author}</TableRowColumn>
-                <TableRowColumn>{post.category}</TableRowColumn>
-                <TableRowColumn>{post.voteScore}</TableRowColumn>
-              </TableRow>
+                </Table.Cell>
+                <Table.Cell>{post.author}</Table.Cell>
+                <Table.Cell>{post.category}</Table.Cell>
+                <Table.Cell>{post.voteScore}</Table.Cell>
+                <Table.Cell>
+                  <Link to={`/posts/${post.id}`}>
+                    {<DetailsIcon size={15} />}
+                  </Link>
+                </Table.Cell>
+              </Table.Row>
             ))}
-          </TableBody>
+          </Table.Body>
         </Table>
         <ul />
       </div>

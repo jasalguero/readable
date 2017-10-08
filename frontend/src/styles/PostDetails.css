@@ -1,0 +1,6 @@
+.post-details .row {
+  display: flex; }
+  .post-details .row .label {
+    font-weight: bold; }
+  .post-details .row .value {
+    margin-left: 20px; }

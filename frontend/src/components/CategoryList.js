@@ -2,38 +2,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import RightArrow from "react-icons/lib/md/link";
 
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn
-} from "material-ui/Table";
+import { Table } from "semantic-ui-react";
 
 const CategoryList = ({ categories = [] }) => {
   return (
     <div className="category-list">
       <h3>Categories</h3>
-      <Table>
-        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-          <TableRow>
-            <TableHeaderColumn>Name</TableHeaderColumn>
-            <TableHeaderColumn>Link</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody displayRowCheckbox={false} showRowHover={true}>
+      <Table selectable>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Name</Table.HeaderCell>
+            <Table.HeaderCell>Link</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
           {categories.map(category => (
-            <TableRow key={category.name}>
-              <TableRowColumn>{category.name}</TableRowColumn>
-              <TableRowColumn>
+            <Table.Row key={category.name}>
+              <Table.Cell>{category.name}</Table.Cell>
+              <Table.Cell>
                 <Link to={`/categories/${category.path}`}>
                   <RightArrow />
                 </Link>
-              </TableRowColumn>
-            </TableRow>
+              </Table.Cell>
+            </Table.Row>
           ))}
-        </TableBody>
+        </Table.Body>
       </Table>
       <ul />
     </div>

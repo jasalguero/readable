@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PostList from "../components/PostList";
-import RaisedButton from "material-ui/RaisedButton";
+import { Button } from "semantic-ui-react";
 import AddPostIcon from "react-icons/lib/fa/pencil-square";
 
 class CategoryRoute extends Component {
@@ -15,7 +15,7 @@ class CategoryRoute extends Component {
         <PostList posts={posts} />
 
         {/* ADD POST*/}
-        <RaisedButton
+        <Button
           containerElement={<Link to="posts/new" />}
           label="Create Post"
           primary={true}
