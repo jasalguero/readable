@@ -26,9 +26,9 @@ class App extends Component {
           <Route exact path="/" component={HomeRoute} />
           <Route
             exact
-            path="/categories/:categoryId"
+            path="/categories/:category"
             render={({ match }) => {
-              return <CategoryRoute categoryId={match.params.categoryId} />;
+              return <CategoryRoute category={match.params.category} />;
             }}
           />
           <Route path="/posts" component={PostsRoute} />
