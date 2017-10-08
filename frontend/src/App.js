@@ -7,7 +7,7 @@ import NotFoundRoute from "./routes/NotFound";
 import { fetchCategories } from "./utils/api";
 import { addCategories} from "./actions";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import "./App.css";
 
 class App extends Component {
