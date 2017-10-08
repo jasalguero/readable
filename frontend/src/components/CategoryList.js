@@ -15,14 +15,14 @@ const CategoryList = ({ categories = [] }) => {
   return (
     <div className="category-list">
       <h3>Categories</h3>
-      <Table selectable={false}>
+      <Table>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
           <TableRow>
             <TableHeaderColumn>Name</TableHeaderColumn>
             <TableHeaderColumn>Link</TableHeaderColumn>
           </TableRow>
         </TableHeader>
-        <TableBody displayRowCheckbox={false}>
+        <TableBody displayRowCheckbox={false} showRowHover={true}>
           {categories.map(category => (
             <TableRow key={category.name}>
               <TableRowColumn>{category.name}</TableRowColumn>

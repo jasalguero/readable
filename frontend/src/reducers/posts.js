@@ -1,17 +1,14 @@
-// import { ADD_RECIPE, REMOVE_FROM_CALENDAR } from "../actions";
+import { ADD_POSTS } from "../actions";
 
-function posts(state = {}, action) {
+function categoriesReducer(state = {}, action) {
   switch (action.type) {
-    // case ADD_RECIPE:
-    //   const { recipe } = action;
-    //   return {
-    //     ...state,
-    //     [recipe.label]: recipe
-    //   };
+    case ADD_POSTS:
+      const { posts } = action;
+      return posts;
 
     default:
       return state;
   }
 }
 
-export default posts;
+export default categoriesReducer;

@@ -1,0 +1,5 @@
+.post-list table thead th {
+  cursor: pointer;
+  text-transform: capitalize; }
+  .post-list table thead th.selected {
+    font-weight: bold !important; }

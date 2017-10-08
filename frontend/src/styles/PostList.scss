@@ -1,0 +1,14 @@
+.post-list {
+  table {
+    thead {
+      th {
+        cursor: pointer;
+        text-transform: capitalize;
+
+        &.selected {
+          font-weight: bold !important;
+        }
+      }
+    }
+  }
+}

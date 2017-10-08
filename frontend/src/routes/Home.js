@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import CategoryList from "../components/CategoryList";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
-
+import CategoryList from "../components/CategoryList";
+import PostList from "../components/PostList";
 
 class HomeRoute extends Component {
   render() {
@@ -10,10 +10,6 @@ class HomeRoute extends Component {
       <div className="home">
         <h1>Home</h1>
         <ul>
-          <li>
-            should list all of the posts ordered by voteScore (highest score
-            first)
-          </li>
           <li>
             should have a control for changing the sort method for the list,
             including at minimum, order by voteScore and order by timestamp
@@ -23,14 +19,18 @@ class HomeRoute extends Component {
 
         {/* CATEGORIES */}
         <CategoryList categories={this.props.categories} />
+
+         {/* POST LIST */}
+         <PostList posts={this.props.posts} />
       </div>
     );
   }
 }
 
-function mapStateToProps({ categories }) {
+function mapStateToProps({ categories, posts }) {
   return {
-    categories
+    categories,
+    posts
   };
 }
 

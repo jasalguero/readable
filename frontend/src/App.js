@@ -4,10 +4,9 @@ import CategoryRoute from "./routes/Category";
 import PostsRoute from "./routes/Posts";
 import HomeRoute from "./routes/Home";
 import NotFoundRoute from "./routes/NotFound";
-import { fetchCategories } from "./utils/api";
-import { addCategories} from "./actions";
+import { fetchCategoriesAndPosts } from "./actions";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import "./App.css";
 
 class App extends Component {
@@ -17,10 +16,7 @@ class App extends Component {
 
   loadInitialState() {
     const { dispatch } = this.props;
-    
-    fetchCategories().then(categories => {
-      dispatch(addCategories(categories));
-    });
+    dispatch(fetchCategoriesAndPosts()).then(() => console.log("data loaded"));
   }
 
   render() {
