@@ -50,7 +50,7 @@ class CategoryRoute extends Component {
 
         {/* ADD POST*/}
         <Button primary>
-          <Link to="posts/new">Create Post</Link>
+          <Link to="/posts/new">Create Post</Link>
         </Button>
 
         {/* DELETE POST CONFIRMATION  */}

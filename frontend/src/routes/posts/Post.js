@@ -86,10 +86,7 @@ class PostRoute extends Component {
     return (
       <div>
         <h1>Post {post.id}</h1>
-        <ul>
-          <li>should have controls to edit or delete the post</li>
-        </ul>
-
+    
         {/* POST DETAILS */}
         <PostDetails post={post} />
 
