@@ -72,7 +72,7 @@ class HomeRoute extends Component {
 function mapStateToProps({ categories, posts }) {
   return {
     categories,
-    posts
+    posts: posts.filter(p => !p.deleted)
   };
 }
 
