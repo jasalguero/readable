@@ -8,6 +8,7 @@ import { loadCategoriesAndPosts } from "./actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Container } from "semantic-ui-react";
+import Header from "./components/Header";
 
 import "./App.css";
 
@@ -24,7 +25,8 @@ class App extends Component {
   render() {
     return (
       <div className="Readable-App">
-        <Container>
+        <Header />
+        <Container className="main-container">
           <Switch>
             <Route exact path="/" component={HomeRoute} />
             <Route

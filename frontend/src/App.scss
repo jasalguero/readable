@@ -1,5 +1,9 @@
 .Readable-App {
   margin: 0 15%;
+
+  .main-container {
+    margin-top: 60px;
+  }
 }
 
 button {
@@ -14,7 +18,8 @@ button {
 }
 
 table.ui {
-  td.controls-cell, thead th.controls-cell {
+  td.controls-cell,
+  thead th.controls-cell {
     text-align: center;
     .icon {
       margin-right: 20px;

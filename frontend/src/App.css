@@ -1,5 +1,7 @@
 .Readable-App {
   margin: 0 15%; }
+  .Readable-App .main-container {
+    margin-top: 60px; }
 
 button a {
   color: white; }
@@ -8,13 +10,17 @@ button a {
   display: flex;
   justify-content: flex-end; }
 
-table.ui td.controls-cell, table.ui thead th.controls-cell {
+table.ui td.controls-cell,
+table.ui thead th.controls-cell {
   text-align: center; }
-  table.ui td.controls-cell .icon, table.ui thead th.controls-cell .icon {
+  table.ui td.controls-cell .icon,
+  table.ui thead th.controls-cell .icon {
     margin-right: 20px;
     cursor: pointer; }
-    table.ui td.controls-cell .icon:hover, table.ui thead th.controls-cell .icon:hover {
+    table.ui td.controls-cell .icon:hover,
+    table.ui thead th.controls-cell .icon:hover {
       font-weight: bold;
       color: blue; }
-    table.ui td.controls-cell .icon.delete:hover, table.ui thead th.controls-cell .icon.delete:hover {
+    table.ui td.controls-cell .icon.delete:hover,
+    table.ui thead th.controls-cell .icon.delete:hover {
       color: red; }
