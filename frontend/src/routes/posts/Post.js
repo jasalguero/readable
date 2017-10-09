@@ -4,7 +4,8 @@ import {
   loadComments,
   createComment,
   saveComment,
-  deleteComment
+  deleteComment,
+  voteComment
 } from "../../actions";
 import { Button, Confirm } from "semantic-ui-react";
 
@@ -74,6 +75,11 @@ class PostRoute extends Component {
     });
   };
 
+  handleVoteComment = (comment, option) => {
+    const { dispatch } = this.props;
+    dispatch(voteComment(comment, option));
+  };
+
   render() {
     const { post, comments } = this.props;
 
@@ -92,6 +98,7 @@ class PostRoute extends Component {
           comments={comments}
           onEditComment={this.handleEditComment}
           onDeleteComment={this.handleDeleteComment}
+          onVoteComment={this.handleVoteComment}
         />
 
         {/* ADD COMMENT*/}
@@ -130,7 +137,9 @@ class PostRoute extends Component {
 function mapStateToProps({ posts = [], comments = [] }, { postId }) {
   return {
     post: posts.find(post => post.id === postId) || {},
-    comments: comments.filter(c => !c.deleted).sort((c1, c2) => c1 - c2)
+    comments: comments
+      .filter(c => !c.deleted)
+      .sort((c1, c2) => c2.voteScore - c1.voteScore)
   };
 }
 

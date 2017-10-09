@@ -15,7 +15,6 @@ table.ui thead th.controls-cell {
   text-align: center; }
   table.ui td.controls-cell .icon,
   table.ui thead th.controls-cell .icon {
-    margin-right: 20px;
     cursor: pointer; }
     table.ui td.controls-cell .icon:hover,
     table.ui thead th.controls-cell .icon:hover {

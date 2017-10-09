@@ -15,6 +15,7 @@ export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const UPDATE_POST = "UPDATE_POST";
 export const REMOVE_POST = "REMOVE_POST";
 export const VOTE_POST = "VOTE_POST";
+export const VOTE_COMMENT = "VOTE_COMMENT";
 
 export function loadCategoriesAndPosts() {
   return dispatch => {
@@ -93,6 +94,14 @@ export function votePost(post, option) {
   return dispatch => {
     API.votePost(post, option).then((updatedPost) => {
       dispatch(updatePost(updatedPost));
+    });
+  };
+}
+
+export function voteComment(comment, option) {
+  return dispatch => {
+    API.voteComment(comment, option).then((updatedComment) => {
+      dispatch(updateComment(updatedComment));
     });
   };
 }

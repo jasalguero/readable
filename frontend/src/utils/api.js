@@ -176,7 +176,19 @@ export function deletePost(post) {
 export function votePost(post, option) {
   return fetch(`${API}/posts/${post.id}`, {
     method: "POST",
-    body: JSON.stringify({option: option}),
+    body: JSON.stringify({ option: option }),
+    headers
+  }).then(res => res.json());
+}
+
+/**
+ * Votes for a comment
+ * @param {String} post 
+ */
+export function voteComment(comment, option) {
+  return fetch(`${API}/comments/${comment.id}`, {
+    method: "POST",
+    body: JSON.stringify({ option: option }),
     headers
   }).then(res => res.json());
 }

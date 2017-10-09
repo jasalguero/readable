@@ -1,6 +1,8 @@
 import React from "react";
 import DeleteIcon from "react-icons/lib/fa/trash";
 import EditIcon from "react-icons/lib/fa/edit";
+import UpVoteIcon from "react-icons/lib/fa/thumbs-o-up";
+import DownVoteIcon from "react-icons/lib/fa/thumbs-o-down";
 
 import { Table } from "semantic-ui-react";
 
@@ -17,7 +19,12 @@ import { Table } from "semantic-ui-react";
  * @param {*} param0 
  */
 
-const CommentList = ({ comments = [], onEditComment, onDeleteComment }) => {
+const CommentList = ({
+  comments = [],
+  onEditComment,
+  onDeleteComment,
+  onVoteComment
+}) => {
   return (
     <div className="category-list">
       <h3>Comments</h3>
@@ -28,7 +35,11 @@ const CommentList = ({ comments = [], onEditComment, onDeleteComment }) => {
             <Table.HeaderCell>Date</Table.HeaderCell>
             <Table.HeaderCell>Body</Table.HeaderCell>
             <Table.HeaderCell>Score</Table.HeaderCell>
-            <Table.HeaderCell>Actions</Table.HeaderCell>
+            <Table.HeaderCell className="controls-cell">Edit</Table.HeaderCell>
+            <Table.HeaderCell className="controls-cell">Vote</Table.HeaderCell>
+            <Table.HeaderCell className="controls-cell">
+              Delete
+            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -47,6 +58,20 @@ const CommentList = ({ comments = [], onEditComment, onDeleteComment }) => {
                   className="icon"
                   onClick={() => onEditComment(comment)}
                 />
+              </Table.Cell>
+              <Table.Cell className="controls-cell">
+                <UpVoteIcon
+                  size={20}
+                  className="icon"
+                  onClick={() => onVoteComment(comment, "upVote")}
+                />
+                <DownVoteIcon
+                  size={20}
+                  className="icon"
+                  onClick={() => onVoteComment(comment, "downVote")}
+                />
+              </Table.Cell>
+              <Table.Cell className="controls-cell">
                 <DeleteIcon
                   size={20}
                   className="icon delete"
