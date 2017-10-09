@@ -3,6 +3,9 @@ import SortDescIcon from "react-icons/lib/fa/sort-alpha-desc";
 import SortAscIcon from "react-icons/lib/fa/sort-alpha-asc";
 import { Link } from "react-router-dom";
 import DetailsIcon from "react-icons/lib/fa/file-text-o";
+import EditIcon from "react-icons/lib/fa/pencil-square";
+import DeleteIcon from "react-icons/lib/fa/trash";
+import VoteIcon from "react-icons/lib/fa/thumbs-o-up";
 
 import "../styles/PostList.css";
 
@@ -71,6 +74,9 @@ class PostList extends Component {
             </Table.HeaderCell>
           ))}
           <Table.HeaderCell>Details</Table.HeaderCell>
+          <Table.HeaderCell>Vote</Table.HeaderCell>
+          <Table.HeaderCell>Edit</Table.HeaderCell>
+          <Table.HeaderCell>Delete</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
     );
@@ -90,6 +96,7 @@ class PostList extends Component {
 
   render() {
     const posts = this.orderPosts();
+    const { onVotePost, onDeletePost } = this.props;
 
     return (
       <div className="post-list">
@@ -109,8 +116,27 @@ class PostList extends Component {
                 <Table.Cell>{post.voteScore}</Table.Cell>
                 <Table.Cell className="controls-cell">
                   <Link to={`/posts/${post.id}`}>
-                    {<DetailsIcon className="icon" size={20} />}
+                    <DetailsIcon className="icon" size={20} />
                   </Link>
+                </Table.Cell>
+                <Table.Cell className="controls-cell">
+                  <VoteIcon
+                    className="icon"
+                    size={20}
+                    onClick={() => onVotePost(post)}
+                  />
+                </Table.Cell>
+                <Table.Cell className="controls-cell">
+                  <Link to={`/posts/${post.id}/edit`}>
+                    <EditIcon className="icon" size={20} />
+                  </Link>
+                </Table.Cell>
+                <Table.Cell className="controls-cell">
+                  <DeleteIcon
+                    className="icon"
+                    size={20}
+                    onClick={() => onDeletePost(post)}
+                  />
                 </Table.Cell>
               </Table.Row>
             ))}

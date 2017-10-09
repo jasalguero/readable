@@ -12,6 +12,9 @@ const headers = {
   Authorization: "123"
 };
 
+/**
+ * Generate uuid-like string
+ */
 const generateUUID = () => {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
@@ -116,6 +119,51 @@ export function updateComment(comment) {
  */
 export function deleteComment(comment) {
   return fetch(`${API}/comments/${comment.id}`, {
+    method: "DELETE",
+    headers
+  }).then(res => res.json());
+}
+
+/**
+ * Create a new post
+ * @param {String} post 
+ */
+export function createPost(post) {
+  const payload = {
+    ...post,
+    timestamp: Date.parse(new Date()),
+    id: generateUUID()
+  };
+
+  return fetch(`${API}/posts`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers
+  }).then(res => res.json());
+}
+
+/**
+ * Updates a post object
+ * @param {String} post 
+ */
+export function updatePost(post) {
+  const payload = {
+    ...post,
+    timestamp: Date.parse(new Date())
+  };
+  return fetch(`${API}/posts/${post.id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+    headers
+  }).then(res => res.json());
+}
+
+/**
+ * Deletes a post object
+ * @param {String} post 
+ */
+export function deletePost(post) {
+  return fetch(`${API}/posts/${post.id}`, {
     method: "DELETE",
     headers
   }).then(res => res.json());

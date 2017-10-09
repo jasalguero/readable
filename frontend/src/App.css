@@ -8,13 +8,13 @@ button a {
   display: flex;
   justify-content: flex-end; }
 
-.controls-cell {
-  display: flex; }
-  .controls-cell .icon {
+table.ui td.controls-cell, table.ui thead th.controls-cell {
+  text-align: center; }
+  table.ui td.controls-cell .icon, table.ui thead th.controls-cell .icon {
     margin-right: 20px;
     cursor: pointer; }
-    .controls-cell .icon:hover {
+    table.ui td.controls-cell .icon:hover, table.ui thead th.controls-cell .icon:hover {
       font-weight: bold;
       color: blue; }
-    .controls-cell .icon.delete:hover {
+    table.ui td.controls-cell .icon.delete:hover, table.ui thead th.controls-cell .icon.delete:hover {
       color: red; }

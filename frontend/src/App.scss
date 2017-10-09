@@ -13,19 +13,21 @@ button {
   justify-content: flex-end;
 }
 
-.controls-cell {
-  display: flex;
-  .icon {
-    margin-right: 20px;
-    cursor: pointer;
+table.ui {
+  td.controls-cell, thead th.controls-cell {
+    text-align: center;
+    .icon {
+      margin-right: 20px;
+      cursor: pointer;
 
-    &:hover {
-      font-weight: bold;
-      color: blue;
-    }
+      &:hover {
+        font-weight: bold;
+        color: blue;
+      }
 
-    &.delete:hover {
-      color: red;
+      &.delete:hover {
+        color: red;
+      }
     }
   }
 }

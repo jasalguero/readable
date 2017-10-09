@@ -1,16 +1,37 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { savePost } from "../../actions";
+import { withRouter } from "react-router";
 
-class NewPostRoute extends Component {
+import PostForm from "../../components/PostForm";
+
+class EditPostRoute extends Component {
+  savePost = post => {
+    const { dispatch, history } = this.props;
+    dispatch(savePost(post));
+    history.push("/");
+  };
+
   render() {
+    const { post, categories } = this.props;
     return (
       <div className="home">
-        <h1>Edit Post {this.props.postId}</h1>
-        <ul>
-          <li>should have a form to create new post or edit existing posts</li>
-        </ul>
+        <h1>Edit Post {post.id}</h1>
+        <PostForm
+          post={post}
+          categories={categories}
+          onSavePost={this.savePost}
+        />
       </div>
     );
   }
 }
 
-export default NewPostRoute;
+function mapStateToProps({ posts = [], categories = [] }, { postId }) {
+  return {
+    post: posts.find(post => post.id === postId) || {},
+    categories
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(EditPostRoute));

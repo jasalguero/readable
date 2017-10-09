@@ -13,11 +13,12 @@ class CommentModal extends Component {
       this.props.onSaveComment({
         ...comment,
         ...values
-      })
+      });
     } else {
       this.props.onSaveComment(values);
     }
   };
+
   render() {
     const { isOpen, comment = {} } = this.props;
 
@@ -25,7 +26,7 @@ class CommentModal extends Component {
       <Modal isOpen={isOpen} onRequestClose={this.props.onRequestClose}>
         <h1>Create Comment</h1>
         <Form
-          className="newsletter-form"
+          className="comment-form"
           onSubmit={event => this.handleSubmit(event)}
         >
           <Form.Field>
@@ -49,7 +50,7 @@ class CommentModal extends Component {
               Cancel
             </Button>
             <Button type="submit" primary>
-              {comment.id ? 'Update' : 'Create'}
+              {comment.id ? "Update" : "Create"}
             </Button>
           </div>
         </Form>

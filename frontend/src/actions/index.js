@@ -12,6 +12,8 @@ export const ADD_COMMENTS = "ADD_COMMENTS";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const UPDATE_COMMENT = "UPDATE_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
+export const UPDATE_POST = "UPDATE_POST";
+export const REMOVE_POST = "REMOVE_POST";
 
 export function loadCategoriesAndPosts() {
   return dispatch => {
@@ -62,6 +64,30 @@ export function deleteComment(comment) {
   };
 }
 
+export function createPost(post) {
+  return dispatch => {
+    API.createPost(post).then(data => {
+      dispatch(addPost(data));
+    });
+  };
+}
+
+export function savePost(post) {
+  return dispatch => {
+    API.updatePost(post).then(data => {
+      dispatch(updatePost(data));
+    });
+  };
+}
+
+export function deletePost(post) {
+  return dispatch => {
+    API.deletePost(post).then(() => {
+      dispatch(removePost(post));
+    });
+  };
+}
+
 export function addCategories(categories) {
   return {
     type: ADD_CATEGORIES,
@@ -72,13 +98,6 @@ export function addCategories(categories) {
 export function addPosts(posts) {
   return {
     type: ADD_POSTS,
-    posts
-  };
-}
-
-export function addPost(posts) {
-  return {
-    type: ADD_POST,
     posts
   };
 }
@@ -108,5 +127,26 @@ export function removeComment(comment) {
   return {
     type: REMOVE_COMMENT,
     comment
+  };
+}
+
+export function addPost(post) {
+  return {
+    type: ADD_POST,
+    post
+  };
+}
+
+export function updatePost(post) {
+  return {
+    type: UPDATE_POST,
+    post
+  };
+}
+
+export function removePost(post) {
+  return {
+    type: REMOVE_POST,
+    post
   };
 }

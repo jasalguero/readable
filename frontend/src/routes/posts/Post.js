@@ -108,6 +108,7 @@ class PostRoute extends Component {
           </Button>
         </div>
 
+        {/* COMMENT FORM MODAL  */}
         <CommentModal
           isOpen={this.state.isCommentModalOpen}
           comment={this.state.selectedComment}
@@ -115,6 +116,7 @@ class PostRoute extends Component {
           onRequestClose={() => this.closeModal()}
         />
 
+        {/* DELETE COMMENT CONFIRMATION  */}
         <Confirm
           open={this.state.isDeleteCommentConfirmOpen}
           onCancel={this.cancelDeleteComment}
