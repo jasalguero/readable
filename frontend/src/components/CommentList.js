@@ -17,7 +17,7 @@ import { Table } from "semantic-ui-react";
  * @param {*} param0 
  */
 
-const CommentList = ({ comments = [] }) => {
+const CommentList = ({ comments = [], onEditComment, onDeleteComment }) => {
   return (
     <div className="category-list">
       <h3>Comments</h3>
@@ -41,9 +41,17 @@ const CommentList = ({ comments = [] }) => {
               </Table.Cell>
               <Table.Cell>{comment.body}</Table.Cell>
               <Table.Cell>{comment.voteScore}</Table.Cell>
-              <Table.Cell>
-                <EditIcon size={15} />
-                <DeleteIcon size={15} />
+              <Table.Cell className="controls-cell">
+                <EditIcon
+                  size={20}
+                  className="icon"
+                  onClick={() => onEditComment(comment)}
+                />
+                <DeleteIcon
+                  size={20}
+                  className="icon delete"
+                  onClick={() => onDeleteComment(comment)}
+                />
               </Table.Cell>
             </Table.Row>
           ))}

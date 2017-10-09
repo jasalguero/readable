@@ -1,2 +1,17 @@
 button a {
   color: white; }
+
+.controls-row {
+  display: flex;
+  justify-content: flex-end; }
+
+.controls-cell {
+  display: flex; }
+  .controls-cell .icon {
+    margin-right: 20px;
+    cursor: pointer; }
+    .controls-cell .icon:hover {
+      font-weight: bold;
+      color: blue; }
+    .controls-cell .icon.delete:hover {
+      color: red; }

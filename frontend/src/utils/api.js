@@ -8,7 +8,30 @@ const API = `http://localhost:3001`;
  */
 const headers = {
   Accept: "application/json",
+  "Content-Type": "application/json",
   Authorization: "123"
+};
+
+const generateUUID = () => {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return (
+    s4() +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    s4() +
+    s4()
+  );
 };
 
 /**
@@ -48,5 +71,52 @@ export function fetchPost(postId) {
  * @param {String} postId 
  */
 export function fetchComments(postId) {
-  return fetch(`${API}/posts/${postId}/comments`, { headers }).then(res => res.json());
+  return fetch(`${API}/posts/${postId}/comments`, { headers }).then(res =>
+    res.json()
+  );
+}
+
+/**
+ * Create a new comment
+ * @param {String} comment 
+ */
+export function createComment(comment) {
+  const payload = {
+    ...comment,
+    timestamp: Date.parse(new Date()),
+    id: generateUUID()
+  };
+
+  return fetch(`${API}/comments`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers
+  }).then(res => res.json());
+}
+
+/**
+ * Updates a comment object
+ * @param {String} comment 
+ */
+export function updateComment(comment) {
+  const payload = {
+    ...comment,
+    timestamp: Date.parse(new Date())
+  };
+  return fetch(`${API}/comments/${comment.id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+    headers
+  }).then(res => res.json());
+}
+
+/**
+ * Deletes a comment object
+ * @param {String} comment 
+ */
+export function deleteComment(comment) {
+  return fetch(`${API}/comments/${comment.id}`, {
+    method: "DELETE",
+    headers
+  }).then(res => res.json());
 }

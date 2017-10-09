@@ -3,3 +3,25 @@ button {
     color: white;
   }
 }
+
+.controls-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.controls-cell {
+  display: flex;
+  .icon {
+    margin-right: 20px;
+    cursor: pointer;
+
+    &:hover {
+      font-weight: bold;
+      color: blue;
+    }
+
+    &.delete:hover {
+      color: red;
+    }
+  }
+}
