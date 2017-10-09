@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import CategoryRoute from "./routes/Category";
-import PostsRoute from "./routes/Posts";
 import HomeRoute from "./routes/Home";
 import NotFoundRoute from "./routes/NotFound";
+import NewPostRoute from "./routes/posts/New";
 import { loadCategoriesAndPosts } from "./actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -29,14 +29,13 @@ class App extends Component {
         <Container className="main-container">
           <Switch>
             <Route exact path="/" component={HomeRoute} />
+            <Route path="/posts/new" exact component={NewPostRoute} />
             <Route
-              exact
-              path="/categories/:category"
+              path="/:category"
               render={({ match }) => {
                 return <CategoryRoute category={match.params.category} />;
               }}
             />
-            <Route path="/posts" component={PostsRoute} />
             <Route component={NotFoundRoute} />
           </Switch>
         </Container>

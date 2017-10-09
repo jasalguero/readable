@@ -5,8 +5,11 @@ import {
   createComment,
   saveComment,
   deleteComment,
-  voteComment
+  voteComment,
+  deletePost,
+  votePost
 } from "../../actions";
+import { withRouter } from "react-router-dom";
 import { Button, Confirm } from "semantic-ui-react";
 
 import PostDetails from "../../components/PostDetails";
@@ -17,7 +20,8 @@ class PostRoute extends Component {
   state = {
     isCommentModalOpen: false,
     isDeleteCommentConfirmOpen: false,
-    selectedComment: undefined
+    selectedComment: undefined,
+    isDeletePostConfirmOpen: false
   };
 
   componentWillMount() {
@@ -25,6 +29,30 @@ class PostRoute extends Component {
 
     dispatch(loadComments(postId));
   }
+
+  deletePost = () => {
+    const { dispatch, post, history } = this.props;
+    dispatch(deletePost(post));
+    this.cancelDeletePost();
+    history.push("/");
+  };
+
+  cancelDeletePost = () => {
+    this.setState({
+      isDeletePostConfirmOpen: false
+    });
+  };
+
+  handleDeletePost = () => {
+    this.setState({
+      isDeletePostConfirmOpen: true
+    });
+  };
+
+  handleVotePost = option => {
+    const { dispatch, post } = this.props;
+    dispatch(votePost(post, option));
+  };
 
   saveComment = comment => {
     const { dispatch, postId } = this.props;
@@ -86,9 +114,13 @@ class PostRoute extends Component {
     return (
       <div>
         <h1>Post {post.id}</h1>
-    
+
         {/* POST DETAILS */}
-        <PostDetails post={post} />
+        <PostDetails
+          post={post}
+          onDeletePost={this.handleDeletePost}
+          onVotePost={this.handleVotePost}
+        />
 
         {/* COMMENT LIST */}
         <CommentList
@@ -126,6 +158,13 @@ class PostRoute extends Component {
           onCancel={this.cancelDeleteComment}
           onConfirm={this.deleteComment}
         />
+
+        {/* DELETE POST CONFIRMATION  */}
+        <Confirm
+          open={this.state.isDeletePostConfirmOpen}
+          onCancel={this.cancelDeletePost}
+          onConfirm={this.deletePost}
+        />
       </div>
     );
   }
@@ -140,4 +179,4 @@ function mapStateToProps({ posts = [], comments = [] }, { postId }) {
   };
 }
 
-export default connect(mapStateToProps)(PostRoute);
+export default withRouter(connect(mapStateToProps)(PostRoute));

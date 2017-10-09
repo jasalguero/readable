@@ -116,7 +116,7 @@ class PostList extends Component {
                 <Table.Cell>{post.category}</Table.Cell>
                 <Table.Cell>{post.voteScore}</Table.Cell>
                 <Table.Cell className="controls-cell">
-                  <Link to={`/posts/${post.id}`}>
+                  <Link to={`/${post.category}/${post.id}`}>
                     <DetailsIcon className="icon" size={20} />
                   </Link>
                 </Table.Cell>
@@ -133,7 +133,7 @@ class PostList extends Component {
                   />
                 </Table.Cell>
                 <Table.Cell className="controls-cell">
-                  <Link to={`/posts/${post.id}/edit`}>
+                  <Link to={`/${post.category}/${post.id}/edit`}>
                     <EditIcon className="icon" size={20} />
                   </Link>
                 </Table.Cell>

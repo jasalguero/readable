@@ -20,7 +20,7 @@ const CategoryList = ({ categories = [] }) => {
             <Table.Row key={category.name}>
               <Table.Cell>{category.name}</Table.Cell>
               <Table.Cell className="controls-cell">
-                <Link to={`/categories/${category.path}`}>
+                <Link to={`/${category.path}`}>
                   <RightArrow className="icon" size={20} />
                 </Link>
               </Table.Cell>

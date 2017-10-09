@@ -1,4 +1,9 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import EditIcon from "react-icons/lib/fa/pencil-square";
+import DeleteIcon from "react-icons/lib/fa/trash";
+import UpVoteIcon from "react-icons/lib/fa/thumbs-o-up";
+import DownVoteIcon from "react-icons/lib/fa/thumbs-o-down";
 import "../styles/PostDetails.css";
 
 /**
@@ -14,7 +19,7 @@ import "../styles/PostDetails.css";
  * deleted	Boolean	Flag if post has been 'deleted' (inaccessible by the front end), (default: false) 
  * */
 
-const PostDetails = ({ post = {} }) => {
+const PostDetails = ({ post = {}, onVotePost, onDeletePost }) => {
   return (
     <div className="post-details">
       <div className="row">
@@ -43,6 +48,26 @@ const PostDetails = ({ post = {} }) => {
       <div className="row">
         <div className="label">Vote Score: </div>
         <div className="value">{post.voteScore}</div>
+      </div>
+      <div className="row actions">
+        <UpVoteIcon
+          className="icon"
+          size={20}
+          onClick={() => onVotePost("upVote")}
+        />
+        <DownVoteIcon
+          className="icon"
+          size={20}
+          onClick={() => onVotePost("downVote")}
+        />
+        <Link to={`/${post.category}/${post.id}/edit`}>
+          <EditIcon className="icon" size={20} />
+        </Link>
+        <DeleteIcon
+          className="icon"
+          size={20}
+          onClick={() => onDeletePost()}
+        />
       </div>
     </div>
   );

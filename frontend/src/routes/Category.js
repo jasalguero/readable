@@ -1,74 +1,39 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import PostList from "../components/PostList";
-import { Button, Confirm } from "semantic-ui-react";
-import { deletePost, votePost } from "../actions";
+import PostRoute from "./posts/Post";
+import EditPostRoute from "./posts/Edit";
+import CategoryDetail from "./CategoryDetail";
+import { Route, Switch } from "react-router-dom";
+import NotFoundRoute from "./NotFound";
 
 class CategoryRoute extends Component {
-  state = {
-    isDeletePostConfirmOpen: false,
-    selectedPost: undefined
-  };
-
-  deletePost = () => {
-    const { dispatch } = this.props;
-    dispatch(deletePost(this.state.selectedPost));
-    this.cancelDeletePost();
-  };
-
-  cancelDeletePost = () => {
-    this.setState({
-      isDeletePostConfirmOpen: false,
-      selectedPost: undefined
-    });
-  };
-
-  handleDeletePost = post => {
-    this.setState({
-      isDeletePostConfirmOpen: true,
-      selectedPost: post
-    });
-  };
-
-  handleVotePost = (post, option) => {
-    const { dispatch } = this.props;
-    dispatch(votePost(post, option));
-  };
-
   render() {
-    const { posts, category } = this.props;
     return (
-      <div>
-        <h1>Category {category}</h1>
-        {/* POST LIST */}
-        <PostList
-          posts={this.props.posts}
-          onDeletePost={this.handleDeletePost}
-          onVotePost={this.handleVotePost}
+      <Switch>
+        <Route
+          path="/:category"
+          exact
+          render={({ match }) => {
+            return <CategoryDetail category={this.props.category} />;
+          }}
         />
-
-        {/* ADD POST*/}
-        <Button primary>
-          <Link to="/posts/new">Create Post</Link>
-        </Button>
-
-        {/* DELETE POST CONFIRMATION  */}
-        <Confirm
-          open={this.state.isDeletePostConfirmOpen}
-          onCancel={this.cancelDeletePost}
-          onConfirm={this.deletePost}
+        <Route
+          path="/:category/:postId/edit"
+          exact
+          render={({ match }) => {
+            return <EditPostRoute postId={match.params.postId} />;
+          }}
         />
-      </div>
+        <Route
+          path="/:category/:postId"
+          exact
+          render={({ match }) => {
+            return <PostRoute postId={match.params.postId} />;
+          }}
+        />
+        <Route component={NotFoundRoute} />
+      </Switch>
     );
   }
 }
 
-function mapStateToProps({ posts }, { category }) {
-  return {
-    posts: posts.filter(post => post.category === category),
-    category
-  };
-}
-
-export default connect(mapStateToProps)(CategoryRoute);
+export default CategoryRoute;
