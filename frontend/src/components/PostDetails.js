@@ -49,6 +49,10 @@ const PostDetails = ({ post = {}, onVotePost, onDeletePost }) => {
         <div className="label">Vote Score: </div>
         <div className="value">{post.voteScore}</div>
       </div>
+      <div className="row">
+        <div className="label">Num Comments: </div>
+        <div className="value">{post.numComments}</div>
+      </div>
       <div className="row actions">
         <UpVoteIcon
           className="icon"

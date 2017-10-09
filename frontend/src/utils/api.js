@@ -192,3 +192,13 @@ export function voteComment(comment, option) {
     headers
   }).then(res => res.json());
 }
+
+/**
+ * Retrieves the amount of comments of the post
+ * @param {String} post 
+ */
+export function fetchNumComments(postId) {
+  return fetch(`${API}/posts/${postId}/comments`, { headers })
+    .then(res => res.json())
+    .then(comments => comments.length);
+}

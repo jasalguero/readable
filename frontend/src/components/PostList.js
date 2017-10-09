@@ -59,7 +59,14 @@ class PostList extends Component {
    * Generate dynamically the table headers
    */
   getTableHeader() {
-    const fields = ["title", "timestamp", "author", "category", "voteScore"];
+    const fields = [
+      "title",
+      "timestamp",
+      "author",
+      "category",
+      "voteScore",
+      "numComments"
+    ];
 
     return (
       <Table.Header>
@@ -115,6 +122,7 @@ class PostList extends Component {
                 <Table.Cell>{post.author}</Table.Cell>
                 <Table.Cell>{post.category}</Table.Cell>
                 <Table.Cell>{post.voteScore}</Table.Cell>
+                <Table.Cell>{post.numComments}</Table.Cell>
                 <Table.Cell className="controls-cell">
                   <Link to={`/${post.category}/${post.id}`}>
                     <DetailsIcon className="icon" size={20} />

@@ -16,12 +16,15 @@ export const UPDATE_POST = "UPDATE_POST";
 export const REMOVE_POST = "REMOVE_POST";
 export const VOTE_POST = "VOTE_POST";
 export const VOTE_COMMENT = "VOTE_COMMENT";
+export const SET_POST_COMMENTS_COUNT = "SET_POST_COMMENTS_COUNT";
 
 export function loadCategoriesAndPosts() {
   return dispatch => {
     return Promise.all([API.fetchCategories(), API.fetchPosts()]).then(data => {
+      const posts = data[1];
       dispatch(addCategories(data[0]));
-      dispatch(addPosts(data[1]));
+      dispatch(addPosts(posts));
+      posts.map(p => dispatch(loadCommentsCountPerPost(p.id)));
     });
   };
 }
@@ -46,6 +49,7 @@ export function createComment(comment) {
   return dispatch => {
     API.createComment(comment).then(data => {
       dispatch(addComment(data));
+      dispatch(loadCommentsCountPerPost(comment.parentId));
     });
   };
 }
@@ -62,6 +66,7 @@ export function deleteComment(comment) {
   return dispatch => {
     API.deleteComment(comment).then(() => {
       dispatch(removeComment(comment));
+      dispatch(loadCommentsCountPerPost(comment.parentId));
     });
   };
 }
@@ -92,7 +97,7 @@ export function deletePost(post) {
 
 export function votePost(post, option) {
   return dispatch => {
-    API.votePost(post, option).then((updatedPost) => {
+    API.votePost(post, option).then(updatedPost => {
       dispatch(updatePost(updatedPost));
     });
   };
@@ -100,8 +105,16 @@ export function votePost(post, option) {
 
 export function voteComment(comment, option) {
   return dispatch => {
-    API.voteComment(comment, option).then((updatedComment) => {
+    API.voteComment(comment, option).then(updatedComment => {
       dispatch(updateComment(updatedComment));
+    });
+  };
+}
+
+export function loadCommentsCountPerPost(postId) {
+  return dispatch => {
+    API.fetchNumComments(postId).then(numComments => {
+      dispatch(setCommentCount(postId, numComments));
     });
   };
 }
@@ -166,5 +179,13 @@ export function removePost(post) {
   return {
     type: REMOVE_POST,
     post
+  };
+}
+
+export function setCommentCount(postId, numComments) {
+  return {
+    type: SET_POST_COMMENTS_COUNT,
+    postId,
+    numComments
   };
 }
