@@ -14,6 +14,7 @@ export const UPDATE_COMMENT = "UPDATE_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const UPDATE_POST = "UPDATE_POST";
 export const REMOVE_POST = "REMOVE_POST";
+export const VOTE_POST = "VOTE_POST";
 
 export function loadCategoriesAndPosts() {
   return dispatch => {
@@ -84,6 +85,14 @@ export function deletePost(post) {
   return dispatch => {
     API.deletePost(post).then(() => {
       dispatch(removePost(post));
+    });
+  };
+}
+
+export function votePost(post, option) {
+  return dispatch => {
+    API.votePost(post, option).then((updatedPost) => {
+      dispatch(updatePost(updatedPost));
     });
   };
 }

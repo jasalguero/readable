@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import DetailsIcon from "react-icons/lib/fa/file-text-o";
 import EditIcon from "react-icons/lib/fa/pencil-square";
 import DeleteIcon from "react-icons/lib/fa/trash";
-import VoteIcon from "react-icons/lib/fa/thumbs-o-up";
+import UpVoteIcon from "react-icons/lib/fa/thumbs-o-up";
+import DownVoteIcon from "react-icons/lib/fa/thumbs-o-down";
 
 import "../styles/PostList.css";
 
@@ -120,10 +121,15 @@ class PostList extends Component {
                   </Link>
                 </Table.Cell>
                 <Table.Cell className="controls-cell">
-                  <VoteIcon
+                  <UpVoteIcon
                     className="icon"
                     size={20}
-                    onClick={() => onVotePost(post)}
+                    onClick={() => onVotePost(post, "upVote")}
+                  />
+                  <DownVoteIcon
+                    className="icon"
+                    size={20}
+                    onClick={() => onVotePost(post, "downVote")}
                   />
                 </Table.Cell>
                 <Table.Cell className="controls-cell">

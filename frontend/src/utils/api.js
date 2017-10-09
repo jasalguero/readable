@@ -168,3 +168,15 @@ export function deletePost(post) {
     headers
   }).then(res => res.json());
 }
+
+/**
+ * Votes for a post
+ * @param {String} post 
+ */
+export function votePost(post, option) {
+  return fetch(`${API}/posts/${post.id}`, {
+    method: "POST",
+    body: JSON.stringify({option: option}),
+    headers
+  }).then(res => res.json());
+}

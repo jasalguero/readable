@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { Button, Confirm } from "semantic-ui-react";
-import { deletePost } from "../actions";
+import { deletePost, votePost } from "../actions";
 
 import CategoryList from "../components/CategoryList";
 import PostList from "../components/PostList";
@@ -17,7 +17,7 @@ class HomeRoute extends Component {
     const { dispatch } = this.props;
     dispatch(deletePost(this.state.selectedPost));
     this.cancelDeletePost();
-  }
+  };
 
   cancelDeletePost = () => {
     this.setState({
@@ -33,6 +33,11 @@ class HomeRoute extends Component {
     });
   };
 
+  handleVotePost = (post, option) => {
+    const { dispatch } = this.props;
+    dispatch(votePost(post, option));
+  };
+
   render() {
     return (
       <div className="home">
@@ -45,6 +50,7 @@ class HomeRoute extends Component {
         <PostList
           posts={this.props.posts}
           onDeletePost={this.handleDeletePost}
+          onVotePost={this.handleVotePost}
         />
 
         {/* ADD POST*/}
