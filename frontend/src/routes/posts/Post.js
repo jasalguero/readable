@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadComments, createComment, saveComment, deleteComment } from "../../actions";
-import { Button } from "semantic-ui-react";
+import {
+  loadComments,
+  createComment,
+  saveComment,
+  deleteComment
+} from "../../actions";
+import { Button, Confirm } from "semantic-ui-react";
 
 import PostDetails from "../../components/PostDetails";
 import CommentList from "../../components/CommentList";
@@ -10,6 +15,7 @@ import CommentModal from "../../components/CommentModal";
 class PostRoute extends Component {
   state = {
     isCommentModalOpen: false,
+    isDeleteCommentConfirmOpen: false,
     selectedComment: undefined
   };
 
@@ -35,6 +41,17 @@ class PostRoute extends Component {
     this.closeModal();
   };
 
+  deleteComment = () => {
+    const { dispatch } = this.props;
+    const { selectedComment } = this.state;
+
+    dispatch(deleteComment(selectedComment));
+    this.setState({
+      isDeleteCommentConfirmOpen: false,
+      selectedComment: undefined
+    });
+  };
+
   closeModal() {
     this.setState({ isCommentModalOpen: false, selectedComment: undefined });
   }
@@ -44,9 +61,17 @@ class PostRoute extends Component {
   };
 
   handleDeleteComment = comment => {
-    const { dispatch } = this.props;
+    this.setState({
+      isDeleteCommentConfirmOpen: true,
+      selectedComment: comment
+    });
+  };
 
-    dispatch(deleteComment(comment));
+  cancelDeleteComment = comment => {
+    this.setState({
+      isDeleteCommentConfirmOpen: false,
+      selectedComment: undefined
+    });
   };
 
   render() {
@@ -71,7 +96,14 @@ class PostRoute extends Component {
 
         {/* ADD COMMENT*/}
         <div className="controls-row">
-          <Button primary onClick={() => this.setState({isCommentModalOpen: true, selectedComment: undefined})}>
+          <Button
+            primary
+            onClick={() =>
+              this.setState({
+                isCommentModalOpen: true,
+                selectedComment: undefined
+              })}
+          >
             Create Comment
           </Button>
         </div>
@@ -81,6 +113,12 @@ class PostRoute extends Component {
           comment={this.state.selectedComment}
           onSaveComment={this.saveComment}
           onRequestClose={() => this.closeModal()}
+        />
+
+        <Confirm
+          open={this.state.isDeleteCommentConfirmOpen}
+          onCancel={this.cancelDeleteComment}
+          onConfirm={this.deleteComment}
         />
       </div>
     );
