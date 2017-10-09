@@ -96,7 +96,7 @@ class PostList extends Component {
         <h3>Posts</h3>
         <Table>
           {this.getTableHeader()}
-          <Table.Body displayRowCheckbox={false} showRowHover={true}>
+          <Table.Body>
             {posts.map(post => (
               <Table.Row key={post.id}>
                 <Table.Cell>{post.title}</Table.Cell>
@@ -107,9 +107,9 @@ class PostList extends Component {
                 <Table.Cell>{post.author}</Table.Cell>
                 <Table.Cell>{post.category}</Table.Cell>
                 <Table.Cell>{post.voteScore}</Table.Cell>
-                <Table.Cell>
+                <Table.Cell className="controls-cell">
                   <Link to={`/posts/${post.id}`}>
-                    {<DetailsIcon size={15} />}
+                    {<DetailsIcon className="icon" size={20} />}
                   </Link>
                 </Table.Cell>
               </Table.Row>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import RightArrow from "react-icons/lib/md/link";
+import RightArrow from "react-icons/lib/fa/long-arrow-right";
 
 import { Table } from "semantic-ui-react";
 
@@ -19,9 +19,9 @@ const CategoryList = ({ categories = [] }) => {
           {categories.map(category => (
             <Table.Row key={category.name}>
               <Table.Cell>{category.name}</Table.Cell>
-              <Table.Cell>
+              <Table.Cell className="controls-cell">
                 <Link to={`/categories/${category.path}`}>
-                  <RightArrow />
+                  <RightArrow className="icon" size={20} />
                 </Link>
               </Table.Cell>
             </Table.Row>
