@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import categories from "./Categories";
-import posts from "./Posts";
-import comments from "./Comments";
+import categories from "./categories";
+import posts from "./posts";
+import comments from "./comments";
 
 export default combineReducers({
   categories,
